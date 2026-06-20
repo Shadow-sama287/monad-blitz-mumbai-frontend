@@ -2,16 +2,15 @@
  * useAgentEconomy.js
  * 
  * Single custom hook wrapping all 5 backend endpoints from AGENTS.md Section 9.
- * Currently uses mock data — swap BASE_URL to the real backend when ready.
+ * Reads configuration from environment variables (.env.local).
  * 
  * Endpoints: GET /agents, POST /job, POST /feedback, POST /dispute, POST /mitosis
  */
 import { useState, useCallback, useRef } from 'react';
 
-// ── Configuration ─────────────────────────────────────────────────────
-const BASE_URL = ''; // Set to backend URL when ready, e.g. 'http://localhost:3001'
-const USE_MOCKS = true; // Flip to false when backend is live
-
+// ── Configuration (from environment variables) ────────────────────────
+const BASE_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000';
+const USE_MOCKS = import.meta.env.VITE_USE_MOCKS === 'true' || !BASE_URL; // Mock if no backend URL
 const MONAD_EXPLORER = 'https://testnet.monadexplorer.com/tx/';
 
 // ── Mock Data ─────────────────────────────────────────────────────────

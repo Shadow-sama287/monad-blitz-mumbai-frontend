@@ -1,0 +1,29 @@
+{
+    "name": "agent-court-backend",
+    "version": "1.0.0",
+    "description": "Agent Court backend - On-chain AI agent dispute resolution",
+    "main": "server.js",
+    "type": "commonjs",
+    "scripts": {
+        "dev": "nodemon server.js",
+        "start": "node server.js"
+    },
+    "keywords": [
+        "monad",
+        "agents",
+        "blockchain",
+        "dispute-resolution"
+    ],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@google/genai": "^2.9.0",
+        "cors": "^2.8.6",
+        "dotenv": "^17.4.2",
+        "express": "^5.2.1",
+        "openai": "^6.44.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.14"
+    }
+}
