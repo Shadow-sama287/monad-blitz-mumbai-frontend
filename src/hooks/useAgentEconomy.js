@@ -218,10 +218,11 @@ export function useAgentEconomy() {
     setDisputeActive(true);
 
     try {
+      setNodeState('agent-a', 'in-court');
       setNodeState('agent-b', 'in-court');
       setNodeState('judge', 'processing');
       setActiveFlow('dispute');
-      addLog('Dispute escalated to Judge_LLM_Oracle — entering court…', 'error');
+      addLog('Dispute escalated to Judge_LLM_Oracle — A & B entering court…', 'error');
 
       if (USE_MOCKS) {
         await delay(2500);
@@ -241,6 +242,7 @@ export function useAgentEconomy() {
         addLog(`Verdict: ${verdict} — reputation ${reputationPenalty} applied on-chain`, 'error', txHash);
 
         await delay(1000);
+        setNodeState('agent-a', 'idle');
         setNodeState('judge', 'idle');
         setNodeState('agent-b', 'idle');
         setActiveFlow(null);
@@ -258,6 +260,7 @@ export function useAgentEconomy() {
 
       await fetchAgents();
 
+      setNodeState('agent-a', 'idle');
       setNodeState('judge', 'idle');
       setNodeState('agent-b', 'idle');
       setActiveFlow(null);
@@ -266,6 +269,7 @@ export function useAgentEconomy() {
       return data;
     } catch (e) {
       addLog(`Dispute failed: ${e.message}`, 'error');
+      setNodeState('agent-a', 'idle');
       setNodeState('judge', 'idle');
       setNodeState('agent-b', 'idle');
       setActiveFlow(null);
